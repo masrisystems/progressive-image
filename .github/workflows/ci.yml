@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - name: CLI smoke test
+        run: |
+          node packages/cli/bin/image-pipeline.mjs --help
+          node packages/cli/bin/image-pipeline.mjs doctor
+      - name: Filename generation
+        run: node packages/cli/bin/image-pipeline.mjs name -c image-pipeline.config.example.js -k "Webdesign Größe" -s services
+      - name: Build Vue package
+        run: npm run build --workspace @masrisystems/progressive-image-vue
+
+  no-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # A real config carries a street address, phone number and GPS. It must
+      # never be committed; only the placeholder example may exist.
+      - name: Reject committed pipeline config
+        run: |
+          if git ls-files | grep -E '(^|/)image-pipeline\.config\.(js|mjs|json)$'; then
+            echo "::error::A real image-pipeline config is committed. Remove it - it contains address, phone and GPS."
+            exit 1
+          fi
+          echo "OK: only the example config is tracked."
