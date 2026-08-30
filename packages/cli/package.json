@@ -1,0 +1,28 @@
+{
+  "name": "@masrisystems/image-pipeline",
+  "version": "0.1.0",
+  "description": "Config-driven image pipeline: WebP + JPEG variants, LQIP thumbnails, GPS/IPTC/EXIF geotagging, keyword-based SEO filenames, and optional S3/R2 upload.",
+  "keywords": ["image", "webp", "optimization", "sharp", "exiftool", "geotag", "iptc", "exif", "seo", "lqip", "thumbnail", "local-seo", "cloudflare-r2"],
+  "license": "MIT",
+  "author": "Masri Systems",
+  "type": "module",
+  "bin": { "image-pipeline": "./bin/image-pipeline.mjs" },
+  "files": ["bin", "src", "image-pipeline.config.example.js", "README.md"],
+  "exports": {
+    ".": "./src/index.mjs",
+    "./config": "./src/config.mjs",
+    "./naming": "./src/naming.mjs",
+    "./metadata": "./src/metadata.mjs",
+    "./process": "./src/process.mjs",
+    "./upload": "./src/upload.mjs"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "exiftool-vendored": "^24.0.0",
+    "sharp": "^0.33.0"
+  },
+  "peerDependencies": { "@aws-sdk/client-s3": "^3.0.0" },
+  "peerDependenciesMeta": { "@aws-sdk/client-s3": { "optional": true } },
+  "repository": { "type": "git", "url": "git+https://github.com/masrisystems/progressive-image.git", "directory": "packages/cli" },
+  "publishConfig": { "access": "public" }
+}

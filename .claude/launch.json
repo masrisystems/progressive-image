@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "pi-demo", "runtimeExecutable": "npx", "runtimeArgs": ["vite", "examples/vue-demo", "--port", "5199", "--strictPort"], "port": 5199 }
+  ]
+}

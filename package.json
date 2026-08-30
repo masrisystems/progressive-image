@@ -1,0 +1,19 @@
+{
+  "name": "progressive-image-workspace",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true,
+    "sharp@0.33.5": true
+  },
+  "devDependencies": {
+    "vite": "^8.2.2"
+  }
+}
