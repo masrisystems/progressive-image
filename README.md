@@ -154,4 +154,4 @@ npm run build --workspaces
 
 ## License
 
-MIT
+Masri Systems Non-Commercial Source-Available License (MS-NC-1.0) — see [LICENSE](LICENSE). Personal and academic use only; business and commercial environments are prohibited without a separate commercial license (`hallo@masrisystems.com`).
